@@ -1,0 +1,12 @@
+.new-ride-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.new-ride-page > * {
+  width: 100%;
+}
+
+

@@ -1,0 +1,187 @@
+<div class="new-ride-page">
+  <mat-toolbar color="primary">{{title}}</mat-toolbar>
+</div>
+
+<div class="new-ride-page">
+  <mat-horizontal-stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>מידע על האוטובוס</ng-template>
+        <mat-list>
+          <mat-list-item>
+            <div>
+              <label>מספר רכב:</label>
+              <mat-form-field>
+                <input matInput formControlName="vehicleNumberCtrl" required>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>צבע:</label>
+              <mat-form-field floatPlaceholder="never">
+                <mat-select formControlName="colorCtrl" placeholder="בחר צבע">
+                  <mat-option *ngFor="let color of colors" [value]="color.id">{{ color.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>חברת הסעות:</label>
+              <mat-form-field>
+                <input matInput formControlName="vehicleCompanyCtrl" required>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <button mat-raised-button color="primary" matStepperNext>הבא</button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>על הנסיעה</ng-template>
+        <mat-list>
+          <mat-list-item>
+            <div>
+              <mat-button-toggle-group formControlName="frequencyCtrl">
+                <mat-button-toggle value="0">חד פעמי</mat-button-toggle>
+                <mat-button-toggle value="1">מחזורי</mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>תאריך התחלה:</label>
+              <mat-form-field floatPlaceholder="never">
+                <input matInput [matDatepicker]="startDatePicker" formControlName="startDateCtrl"
+                       placeholder="בחר תאריך">
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi="true" #startDatePicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>תאריך סיום:</label>
+              <mat-form-field floatPlaceholder="never">
+                <input matInput [matDatepicker]="endDatePicker" formControlName="endDateCtrl" placeholder="בחר תאריך">
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi="true" #endDatePicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>בימים:</label>
+              <mat-form-field>
+                <mat-select formControlName="daySelectCtrl" placeholder="בחר ימים" multiple>
+                  <mat-option *ngFor="let day of days" [value]="day.id">{{ day.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <!--<mat-list-item>-->
+            <!--<div>-->
+              <!--<label>ימים נבחרים: {{this.secondFormGroup.get('daySelectCtrl').value}}</label>-->
+            <!--</div>-->
+          <!--</mat-list-item>-->
+          <mat-list-item>
+            <div>
+              <label>שעת התחלה:</label>
+              <button mat-icon-button (click)="openDialogTimeStart()"><mat-icon>schedule</mat-icon></button>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>שעת סיום:</label>
+              <button mat-icon-button (click)="openDialogTimeEnd()"><mat-icon>schedule</mat-icon></button>
+            </div>
+          </mat-list-item>
+          <!--<mat-list-item>-->
+            <!--<div>-->
+              <!--<button mat-button (click)="try()">בדיקת שליפת ערכים של המחזורי</button>-->
+              <!--<label>{{labelCheck}}</label>-->
+            <!--</div>-->
+          <!--</mat-list-item>-->
+          <mat-list-item>
+            <div>
+              <button mat-raised-button color="primary" matStepperPrevious>הקודם</button>
+              <button mat-raised-button color="primary" matStepperNext>הבא</button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </form>
+    </mat-step>
+
+
+    <mat-step>
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>תחנות</ng-template>
+        <mat-list>
+          <mat-list-item>
+            <div>
+              <label>תחנת התחלה:</label>
+              <mat-form-field>
+                <mat-select formControlName="startStopSelectCtrl" placeholder="בחר תחנה">
+                  <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>תחנת סיום:</label>
+              <mat-form-field>
+                <mat-select formControlName="endStopSelectCtrl" placeholder="בחר תחנה">
+                  <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>תחנות ביניים הלוך:</label>
+              <mat-form-field>
+                <mat-select formControlName="stopsGoSelectCtrl" placeholder="בחר תחנות" multiple>
+                  <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>תחנות ביניים חזור:</label>
+              <mat-form-field>
+                <mat-select formControlName="stopsBackSelectCtrl" placeholder="בחר תחנות" multiple>
+                  <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <label>הערות:</label>
+              <mat-form-field >
+                  <input matInput formControlName="notesCtrl">
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div>
+              <button mat-raised-button color="primary" matStepperPrevious>הקודם</button>
+              <button mat-raised-button color="warn" >צור</button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+

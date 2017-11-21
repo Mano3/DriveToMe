@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AppComponent,TimeDialog} from './app.component';
+import {AppComponent, TimeDialogComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
@@ -24,7 +24,7 @@ import {
 
 @NgModule({
   declarations: [
-    AppComponent,TimeDialog
+    AppComponent, TimeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +49,7 @@ import {
 
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'he-IL'}],
-  bootstrap: [AppComponent,TimeDialog]
+  bootstrap: [AppComponent, TimeDialogComponent]
 })
 export class AppModule {
 

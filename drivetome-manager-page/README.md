@@ -1,7 +1,6 @@
 # drivetomeManagerPage
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
-This project uses Angular 4, ng-bootstrap and Angular Material (and also their dependencies).
 
 ## Development server
 

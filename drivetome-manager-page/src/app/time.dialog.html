@@ -2,11 +2,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;">
-<div mat-dialog-content>
+  <div mat-dialog-content>
     <ngb-timepicker [(ngModel)]="data.time" [spinners]="false" ></ngb-timepicker>
-</div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data.time" tabindex="2">אישור</button>
-  <button mat-button [mat-dialog-close]="selectedTime" tabindex="-1">ביטול</button>
-</div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data.time" tabindex="2">אישור</button>
+    <button mat-button [mat-dialog-close]="selectedTime" tabindex="-1">ביטול</button>
+  </div>
 </div>

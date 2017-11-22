@@ -45,7 +45,8 @@
         </div>
         <div>
           <mat-form-field>
-            <input matInput [min]="endDateMin()" [matDatepicker]="endDatePicker" readonly="true" formControlName="endDateCtrl"
+            <input matInput [min]="endDateMin()" [matDatepicker]="endDatePicker" readonly="true"
+                   formControlName="endDateCtrl"
                    placeholder="תאריך סיום">
             <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
             <mat-datepicker touchUi="true" #endDatePicker disabled="false"></mat-datepicker>

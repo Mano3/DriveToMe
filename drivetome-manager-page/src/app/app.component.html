@@ -5,21 +5,18 @@
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>אוטובוס</ng-template>
         <div>
-          <label>מספר רכב:</label>
           <mat-form-field>
-            <input matInput formControlName="vehicleNumberCtrl" required>
+            <input matInput formControlName="vehicleNumberCtrl" placeholder="מספר רכב" required>
           </mat-form-field>
         </div>
         <div>
-          <label>צבע:</label>
           <mat-form-field>
-            <input matInput formControlName="colorCtrl" required>
+            <input matInput formControlName="colorCtrl" placeholder="צבע" required>
           </mat-form-field>
         </div>
         <div>
-          <label>חברת הסעות:</label>
           <mat-form-field>
-            <input matInput formControlName="vehicleCompanyCtrl" required>
+            <input matInput formControlName="vehicleCompanyCtrl" placeholder="חברת הסעות" required>
           </mat-form-field>
         </div>
         <div>
@@ -31,7 +28,7 @@
 
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>נסיעה</ng-template>
+        <ng-template matStepLabel>זמנים</ng-template>
         <div>
           <mat-button-toggle-group formControlName="frequencyCtrl">
             <mat-button-toggle value="0">חד פעמי</mat-button-toggle>
@@ -39,51 +36,44 @@
           </mat-button-toggle-group>
         </div>
         <div>
-          <label>תאריך התחלה:</label>
-          <mat-form-field floatPlaceholder="never">
-            <input matInput [matDatepicker]="startDatePicker" formControlName="startDateCtrl"
-                   placeholder="בחר תאריך">
+          <mat-form-field>
+            <input matInput [min]="today" [max]="startDateMax()" readonly="true" [matDatepicker]="startDatePicker"
+                   formControlName="startDateCtrl" placeholder="תאריך התחלה">
             <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi="true" #startDatePicker></mat-datepicker>
+            <mat-datepicker touchUi="true" #startDatePicker disabled="false"></mat-datepicker>
           </mat-form-field>
         </div>
         <div>
-          <label>תאריך סיום:</label>
-          <mat-form-field floatPlaceholder="never">
-            <input matInput [matDatepicker]="endDatePicker" formControlName="endDateCtrl" placeholder="בחר תאריך">
+          <mat-form-field>
+            <input matInput [min]="endDateMin()" [matDatepicker]="endDatePicker" readonly="true" formControlName="endDateCtrl"
+                   placeholder="תאריך סיום">
             <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi="true" #endDatePicker></mat-datepicker>
+            <mat-datepicker touchUi="true" #endDatePicker disabled="false"></mat-datepicker>
           </mat-form-field>
         </div>
         <div>
-          <label>בימים:</label>
-          <mat-form-field floatPlaceholder="never">
-            <mat-select formControlName="daySelectCtrl" placeholder="בחר ימים" multiple>
+          <mat-form-field>
+            <mat-select formControlName="daySelectCtrl" multiple placeholder="בימים">
               <mat-option *ngFor="let day of days" [value]="day.id">{{ day.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <!--<div>-->
-        <!--<label>ימים נבחרים: {{this.secondFormGroup.get('daySelectCtrl').value}}</label>-->
-        <!--</div>-->
         <div>
-          <label>שעת התחלה:</label>
-          <button mat-icon-button (click)="openDialogTimeStart()">
-            <mat-icon>schedule</mat-icon>
-          </button>
+          <mat-form-field>
+            <input matInput formControlName="startTimeCtrl" readonly="true" placeholder="שעת התחלה"/>
+            <button mat-button matSuffix mat-icon-button (click)="openDialogTimeStart()">
+              <mat-icon>schedule</mat-icon>
+            </button>
+          </mat-form-field>
         </div>
         <div>
-          <label>שעת סיום:</label>
-          <button mat-icon-button (click)="openDialogTimeEnd()">
-            <mat-icon>schedule</mat-icon>
-          </button>
+          <mat-form-field>
+            <input matInput formControlName="endTimeCtrl" readonly="true" placeholder="שעת סיום"/>
+            <button mat-button matSuffix mat-icon-button (click)="openDialogTimeEnd()">
+              <mat-icon>schedule</mat-icon>
+            </button>
+          </mat-form-field>
         </div>
-        <!--<mat-list-item>-->
-        <!--<div>-->
-        <!--<button mat-button (click)="try()">בדיקת שליפת ערכים של המחזורי</button>-->
-        <!--<label>{{labelCheck}}</label>-->
-        <!--</div>-->
-        <!--</mat-list-item>-->
         <div>
           <button mat-raised-button color="primary" matStepperPrevious>הקודם</button>
           <button mat-raised-button color="primary" matStepperNext>הבא</button>
@@ -96,46 +86,43 @@
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>תחנות</ng-template>
         <div>
-          <label>מוצא:</label>
-          <mat-form-field floatPlaceholder="never">
-            <mat-select formControlName="startStopSelectCtrl" placeholder="בחר תחנה">
-              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <label>יעד:</label>
-          <mat-form-field floatPlaceholder="never">
-            <mat-select formControlName="endStopSelectCtrl" placeholder="בחר תחנה">
-              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <label>ביניים הלוך:</label>
-          <mat-form-field floatPlaceholder="never">
-            <mat-select formControlName="stopsGoSelectCtrl" placeholder="בחר תחנות" multiple>
-              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <label>ביניים חזור:</label>
-          <mat-form-field floatPlaceholder="never">
-            <mat-select formControlName="stopsBackSelectCtrl" placeholder="בחר תחנות" multiple>
-              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <label>הערות:</label>
           <mat-form-field>
-            <input matInput formControlName="notesCtrl">
+            <mat-select formControlName="startStopSelectCtrl" placeholder="תחנת מוצא">
+              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select formControlName="endStopSelectCtrl" placeholder="תחנת יעד">
+              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select formControlName="stopsGoSelectCtrl" multiple placeholder="תחנות ביניים הלוך">
+              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select formControlName="stopsBackSelectCtrl" multiple placeholder="תחנות ביניים חזור">
+              <mat-option *ngFor="let stop of stops" [value]="stop.id">{{ stop.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput formControlName="notesCtrl" placeholder="הערות">
           </mat-form-field>
         </div>
         <div>
           <button mat-raised-button color="primary" matStepperPrevious>הקודם</button>
-          <button mat-raised-button color="warn">צור</button>
+          <button mat-raised-button [disabled]="firstFormGroup.invalid||secondFormGroup.invalid||thirdFormGroup.invalid"
+                  color="primary">צור
+          </button>
         </div>
       </form>
     </mat-step>

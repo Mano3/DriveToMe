@@ -1,5 +1,5 @@
 import {Component, Inject, ViewEncapsulation} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   templateUrl: './time.dialog.component.html',
@@ -13,7 +13,9 @@ export class TimeDialogComponent {
   today = new Date();
   selectedTime = {hour: this.today.getHours(), minute: this.today.getMinutes()};
 
-  constructor(public dialogRef: MatDialogRef<TimeDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    if (data.time != null) {
+      this.selectedTime = data.time;
+    }
   }
 }

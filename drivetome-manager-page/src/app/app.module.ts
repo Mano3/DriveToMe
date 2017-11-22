@@ -10,7 +10,6 @@ import {
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
-  MatCheckboxModule,
   MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
@@ -45,11 +44,12 @@ import {
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule,
     NgbModule.forRoot(),
 
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'he-IL'}],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'he-IL'}
+  ],
   bootstrap: [AppComponent, TimeDialogComponent]
 })
 export class AppModule {

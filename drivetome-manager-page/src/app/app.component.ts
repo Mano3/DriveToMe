@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, public dialog: MatDialog) {
   }
 
+
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       vehicleNumberCtrl: ['', Validators.required],
@@ -51,10 +52,12 @@ export class AppComponent implements OnInit {
       vehicleCompanyCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      frequencyCtrl: ['', Validators.required],
+      frequencyCtrl: ['0', Validators.required],
       daySelectCtrl: ['', Validators.required],
       startDateCtrl: ['', Validators.required],
       endDateCtrl: ['', Validators.required],
+      startTimeCtrl: ['', Validators.required],
+      endTimeCtrl: ['', Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
       startStopSelectCtrl: ['', Validators.required],
@@ -66,14 +69,28 @@ export class AppComponent implements OnInit {
   }
 
   openDialogTimeStart(): void {
+
     const dialogRef = this.dialog.open(TimeDialogComponent, {
       width: '250px',
       data: {time: this.timeStart}
     });
 
+    dialogRef.disableClose = true;
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.timeStart = result;
+      const displayHour = result.hour.toString().length < 2 ? '0' + result.hour : result.hour;
+      const displayMinute = result.minute.toString().length < 2 ? '0' + result.minute : result.minute;
+      this.secondFormGroup.get('startTimeCtrl').setValue(displayHour + ':' + displayMinute);
+    });
+
+    dialogRef.backdropClick().subscribe(() => {
+      const timeStartCheck = this.secondFormGroup.get('startTimeCtrl').value;
+      const timeToReturn = timeStartCheck === '' ? {
+        hour: this.today.getHours(),
+        minute: this.today.getMinutes()
+      } : {hour: timeStartCheck.split(':')[0], minute: timeStartCheck.split(':')[1]};
+      dialogRef.close(timeToReturn);
     });
   }
 
@@ -83,19 +100,38 @@ export class AppComponent implements OnInit {
       data: {time: this.timeEnd}
     });
 
+    dialogRef.disableClose = true;
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.timeEnd = result;
+      const displayHour = result.hour.toString().length < 2 ? '0' + result.hour : result.hour;
+      const displayMinute = result.minute.toString().length < 2 ? '0' + result.minute : result.minute;
+      this.secondFormGroup.get('endTimeCtrl').setValue(displayHour + ':' + displayMinute);
+    });
+
+    dialogRef.backdropClick().subscribe(() => {
+      const timeEndCheck = this.secondFormGroup.get('endTimeCtrl').value;
+      const timeToReturn = timeEndCheck === '' ? {
+        hour: this.today.getHours(),
+        minute: this.today.getMinutes()
+      } : {hour: timeEndCheck.split(':')[0], minute: timeEndCheck.split(':')[1]};
+      dialogRef.close(timeToReturn);
     });
   }
 
+  endDateMin(): Date {
+    return this.secondFormGroup.get('startDateCtrl').value > this.today ? this.secondFormGroup.get('startDateCtrl').value : this.today;
+  }
 
-  // try()
-  // {
-  //   this.labelCheck=this.secondFormGroup.get('frequencyCtrl').value;
-  // }
-
-
+  startDateMax(): Date {
+    return this.secondFormGroup.get('endDateCtrl').value > this.today ? this.secondFormGroup.get('endDateCtrl').value : null;
+  }
 }
+
+// try()
+// {
+//   this.labelCheck=this.secondFormGroup.get('frequencyCtrl').value;
+// }
+
 
 

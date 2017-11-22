@@ -128,10 +128,5 @@ export class AppComponent implements OnInit {
   }
 }
 
-// try()
-// {
-//   this.labelCheck=this.secondFormGroup.get('frequencyCtrl').value;
-// }
-
 
 

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
-import {ViewEncapsulation} from '@angular/core';
 import {WeekDay} from './models/weekDay.model';
 import {Station} from './models/station.model';
 import {TimeDialogComponent} from './components/time.dialog.component';
@@ -10,7 +9,7 @@ import {TimeDialogComponent} from './components/time.dialog.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+
 })
 
 export class AppComponent implements OnInit {

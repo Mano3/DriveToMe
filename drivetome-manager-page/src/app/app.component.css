@@ -1,12 +1,12 @@
 .new-ride-page {
-  display: flex;
-  flex-direction: column;
-  align-items: right;
-  justify-content: space-around;
+
 }
 
 .new-ride-page > * {
-
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
 }
 
 

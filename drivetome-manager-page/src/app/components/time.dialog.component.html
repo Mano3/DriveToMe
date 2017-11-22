@@ -1,9 +1,6 @@
-<div style="display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;">
+<div class="dialog_style">
   <div mat-dialog-content>
-    <ngb-timepicker [(ngModel)]="data.time" [spinners]="false" ></ngb-timepicker>
+    <ngb-timepicker [(ngModel)]="data.time" [spinners]="false"></ngb-timepicker>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="data.time" tabindex="2">אישור</button>

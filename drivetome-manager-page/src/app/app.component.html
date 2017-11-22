@@ -1,5 +1,4 @@
-
-<mat-toolbar  color="primary">{{title}}</mat-toolbar>
+<mat-toolbar class="new-ride-page" color="primary">{{title}}</mat-toolbar>
 <div class="new-ride-page">
   <mat-horizontal-stepper>
     <mat-step [stepControl]="firstFormGroup">
@@ -69,11 +68,15 @@
         <!--</div>-->
         <div>
           <label>שעת התחלה:</label>
-          <button mat-icon-button (click)="openDialogTimeStart()"><mat-icon>schedule</mat-icon></button>
+          <button mat-icon-button (click)="openDialogTimeStart()">
+            <mat-icon>schedule</mat-icon>
+          </button>
         </div>
         <div>
           <label>שעת סיום:</label>
-          <button mat-icon-button (click)="openDialogTimeEnd()"><mat-icon>schedule</mat-icon></button>
+          <button mat-icon-button (click)="openDialogTimeEnd()">
+            <mat-icon>schedule</mat-icon>
+          </button>
         </div>
         <!--<mat-list-item>-->
         <!--<div>-->
@@ -89,7 +92,7 @@
     </mat-step>
 
 
-    <mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>תחנות</ng-template>
         <div>
@@ -126,13 +129,13 @@
         </div>
         <div>
           <label>הערות:</label>
-          <mat-form-field >
+          <mat-form-field>
             <input matInput formControlName="notesCtrl">
           </mat-form-field>
         </div>
         <div>
           <button mat-raised-button color="primary" matStepperPrevious>הקודם</button>
-          <button mat-raised-button color="warn" >צור</button>
+          <button mat-raised-button color="warn">צור</button>
         </div>
       </form>
     </mat-step>

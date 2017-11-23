@@ -15,16 +15,19 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
   MatNativeDateModule,
   MatSelectModule,
   MatStepperModule,
   MatToolbarModule
 } from '@angular/material';
+import {HeaderComponent} from './components/header.component';
+import {BusComponent} from './components/bus.component';
+import {LineTimeComponent} from './components/line.time.component';
+import {SelectStationsComponent} from './components/select.stations.component';
 
 @NgModule({
   declarations: [
-    AppComponent, TimeDialogComponent
+    AppComponent, TimeDialogComponent, HeaderComponent, BusComponent, LineTimeComponent, SelectStationsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,6 @@ import {
     MatAutocompleteModule,
     MatInputModule,
     MatToolbarModule,
-    MatListModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -50,7 +52,7 @@ import {
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'he-IL'}
   ],
-  bootstrap: [AppComponent, TimeDialogComponent]
+  bootstrap: [AppComponent, TimeDialogComponent, HeaderComponent, BusComponent, LineTimeComponent, SelectStationsComponent]
 })
 export class AppModule {
 

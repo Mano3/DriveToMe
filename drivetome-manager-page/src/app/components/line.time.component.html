@@ -1,0 +1,48 @@
+<form class="line_time_style" [formGroup]="lineTimeFormGroup">
+  <div class="frequency_style">
+    <mat-button-toggle-group formControlName="frequencyCtrl">
+      <mat-button-toggle value="0">חד פעמי</mat-button-toggle>
+      <mat-button-toggle value="1">מחזורי</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput [min]="today" [max]="startDateMax()" readonly="true" [matDatepicker]="startDatePicker"
+             formControlName="startDateCtrl" placeholder="תאריך התחלה">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #startDatePicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput [min]="endDateMin()" [matDatepicker]="endDatePicker" readonly="true"
+             formControlName="endDateCtrl"
+             placeholder="תאריך סיום">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #endDatePicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-select formControlName="daySelectCtrl" multiple placeholder="בימים">
+        <mat-option *ngFor="let day of days" [value]="day.id">{{ day.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput formControlName="startTimeCtrl" readonly="true" placeholder="שעת התחלה"/>
+      <button mat-button matSuffix mat-icon-button (click)="openDialogTimeStart()">
+        <mat-icon>schedule</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput formControlName="endTimeCtrl" readonly="true" placeholder="שעת סיום"/>
+      <button mat-button matSuffix mat-icon-button (click)="openDialogTimeEnd()">
+        <mat-icon>schedule</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</form>

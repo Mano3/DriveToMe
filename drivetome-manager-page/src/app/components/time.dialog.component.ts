@@ -10,12 +10,8 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 
 export class TimeDialogComponent {
 
-  today = new Date();
-  selectedTime = {hour: this.today.getHours(), minute: this.today.getMinutes()};
+  selectedTime = null;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    if (data.time != null) {
-      this.selectedTime = data.time;
-    }
   }
 }
